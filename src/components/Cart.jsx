@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import {Card, Button} from "react-bootstrap"
-
+import { useEffect } from 'react';
 import { remove } from '../store/CartSlice';
 const Cart = () => {
 
@@ -16,6 +16,10 @@ const Cart = () => {
 
   const products= useSelector(state=> state.cart);
   
+  useEffect(() => {
+    // Save cart to local storage whenever it changes
+    localStorage.setItem('products', JSON.stringify(products));
+  }, [products]);
 
 
     const cards= products.map(product=>(
